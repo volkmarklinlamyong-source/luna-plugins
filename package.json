@@ -9,17 +9,17 @@
     "serve": "http-server ./dist -p 3000 -s --cors -c-1"
   },
   "devDependencies": {
-    "@inrixia/helpers": "^3.20.0",
-    "@types/node": "^22.15.21",
-    "@types/react": "^19.1.5",
-    "@types/react-dom": "^19.1.5",
-    "concurrently": "^9.1.2",
-    "electron": "^36.3.1",
+    "@inrixia/helpers": "^3.21.2",
+    "@types/node": "^25.0.10",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "concurrently": "^9.2.1",
+    "electron": "^40.0.0",
     "http-server": "^14.1.1",
-    "luna": "github:inrixia/TidaLuna#c0d6753",
+    "luna": "github:Inrixia/TidaLuna",
     "oby": "^15.1.2",
-    "rimraf": "^6.0.1",
-    "tsx": "^4.19.4",
-    "typescript": "^5.8.3"
+    "rimraf": "^6.1.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
