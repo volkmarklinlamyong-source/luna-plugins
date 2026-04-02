@@ -1,7 +1,5 @@
 import { createServer, IncomingMessage, ServerResponse } from "http";
 
-console.log("EPIC STYLE");
-
 import https from "https";
 
 interface ServerConfig {

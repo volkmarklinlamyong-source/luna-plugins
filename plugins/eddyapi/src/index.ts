@@ -1,7 +1,6 @@
 import type { LunaUnload } from "@luna/core";
-import { redux, MediaItem, PlayState, ipcRenderer } from "@luna/lib";
+import { redux, MediaItem, PlayState } from "@luna/lib";
 
-import { intercept } from "plugins/lib/src/redux";
 import { getCurrentReduxTime } from "./time";
 import { startServer, stopServer, updateMediaInfo } from "./serveApi.native";
 
@@ -30,6 +29,7 @@ interface UpdateInfo {
 }
 
 let currentInfo: MediaInfo | null = null;
+let server = null;
 
 const getMediaURL = (id?: string, path = "/1280x1280.jpg") =>
   id
@@ -57,7 +57,7 @@ export const update = async (info?: UpdateInfo) => {
     currentInfo.item = info.track.tidalItem;
     console.log("Track changed:", currentInfo.item);
     const track = currentInfo.item;
-    currentInfo.albumArt = await info.track.coverUrl();
+    currentInfo.albumArt = (await info.track.coverUrl()) || null;
     currentInfo.artistArt =
       track.artist && track.artist.picture
         ? getMediaURL(track.artist.picture, "/320x320.jpg")
@@ -92,10 +92,10 @@ export const update = async (info?: UpdateInfo) => {
   console.log(redux);
   const printPlayTime = async () => {
     let info = {
-      time: PlayState.paused
+      time: !PlayState.playing
         ? redux.store.getState().playbackControls.latestCurrentTime
         : getCurrentReduxTime(),
-      paused: PlayState.paused,
+      paused: !PlayState.playing,
     };
     update(info);
     // wait for 1 second
